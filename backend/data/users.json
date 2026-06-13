@@ -1,0 +1,18 @@
+[
+  {
+    "username": "23cs016@drngpit.ac.in",
+    "email": "devasri@6383",
+    "password": "$2a$10$Q7WjgmDDB5sLyR0qVpf4o.qhzCbhainsiW6nM4xBNsyuRB2FekH6e",
+    "_id": "rmkesv00emqcbr8s1",
+    "createdAt": "2026-06-13T12:21:31.825Z",
+    "updatedAt": "2026-06-13T12:21:31.825Z"
+  },
+  {
+    "username": "Devasri",
+    "email": "23cs016@drngpit.ac.in",
+    "password": "$2a$10$m9nGuKChb.SYb0GaF0woze4i/h3LvvO3ABj38hsmFWgbDXqjEhO/u",
+    "_id": "732ft318smqcc0hn6",
+    "createdAt": "2026-06-13T12:28:43.218Z",
+    "updatedAt": "2026-06-13T12:28:43.218Z"
+  }
+]

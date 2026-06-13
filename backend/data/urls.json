@@ -1,0 +1,28 @@
+[
+  {
+    "originalUrl": "https://chatgpt.com/g/g-p-6a2cf20d434c81919e03d6f04291e8fa-katamaran/c/6a2d38a1-8110-83ee-ba80-9c7b329911ca",
+    "shortCode": "openai-chat",
+    "customAlias": "openai-chat",
+    "title": "OpenAI Chat Assistant",
+    "userId": "rmkesv00emqcbr8s1",
+    "expiryDate": "2026-10-09T00:00:00.000Z",
+    "clicks": 12,
+    "isActive": true,
+    "_id": "fwq1ytik7mqcbw5hy",
+    "createdAt": "2026-06-13T12:25:20.854Z",
+    "updatedAt": "2026-06-13T16:15:32.161Z"
+  },
+  {
+    "originalUrl": "https://in.pinterest.com/",
+    "shortCode": "e0af068",
+    "customAlias": null,
+    "title": "pinterest",
+    "userId": "732ft318smqcc0hn6",
+    "expiryDate": "2026-08-10T00:00:00.000Z",
+    "clicks": 4,
+    "isActive": true,
+    "_id": "kwyhk70qwmqcctpjg",
+    "createdAt": "2026-06-13T12:51:26.476Z",
+    "updatedAt": "2026-06-13T16:28:42.494Z"
+  }
+]
