@@ -9,10 +9,18 @@ import UrlCard from '../components/UrlCard';
 const Dashboard = ({ setToast, toggleTheme, theme }) => {
   const { user, logout } = useContext(AuthContext);
   const [urls, setUrls] = useState([]);
+
+  const ensureAbsoluteUrl = (link) => {
+    if (!link) return '';
+    if (!/^https?:\/\//i.test(link)) {
+      return 'https://' + link;
+    }
+    return link;
+  };
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all'); // all, active, expired
-  
+
   // URL Creator State
   const [originalUrl, setOriginalUrl] = useState('');
   const [title, setTitle] = useState('');
@@ -77,7 +85,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
       const res = await api.post('/api/url/create', { originalUrl, title, customAlias, expiryDate });
       setUrls([res.data, ...urls]);
       setToast({ message: 'Short link initialized.', type: 'success' });
-      
+
       // Reset Inputs
       setOriginalUrl('');
       setTitle('');
@@ -133,7 +141,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-650 hidden sm:inline">
+            <span className="text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-655 hidden sm:inline">
               SECURE CONNECTION // USER: <span className="text-indigo-400 font-bold uppercase">{user?.username}</span>
             </span>
 
@@ -161,7 +169,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
 
       {/* Main Console Layout */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Left Column: Shortener Panel Console (Taller layout with more padding/spacing) */}
         <section className="lg:col-span-4 space-y-6">
           <GlassCard className="border-indigo-500/15 p-8 sm:p-10 py-12">
@@ -242,7 +250,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                   .map((url, index) => {
                     const rankColors = [
                       'from-amber-400 to-yellow-500 text-yellow-950 shadow-[0_0_10px_rgba(234,179,8,0.2)]',
-                      'from-slate-300 to-slate-400 text-slate-950 shadow-[0_0_10px_rgba(148,163,184,0.2)]',
+                      'from-slate-300 to-slate-400 text-slate-955 shadow-[0_0_10px_rgba(148,163,184,0.2)]',
                       'from-amber-600 to-amber-700 text-amber-50 shadow-[0_0_10px_rgba(180,83,9,0.2)]'
                     ];
                     const rankLabels = ['1ST', '2ND', '3RD'];
@@ -260,7 +268,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                               {url.title || 'Untitled Link'}
                             </span>
                             <a
-                              href={url.shortUrl || `${window.location.origin}/${url.shortCode}`}
+                              href={ensureAbsoluteUrl(url.shortUrl || `${window.location.origin}/${url.shortCode}`)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-[9px] text-indigo-400 hover:text-indigo-300 hover:underline font-mono truncate block"
@@ -285,7 +293,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
 
         {/* Right Column: Deck & Cards Grid */}
         <section className="lg:col-span-8 space-y-8">
-          
+
           {/* Controls Panel */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Search Input */}
@@ -335,27 +343,27 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                 ))}
               </div>
             ) : filteredUrls.length === 0 ? (
-              <GlassCard className="text-center py-12 border-indigo-500/5 bg-slate-950/15">
+              <GlassCard className="text-center py-12 border-indigo-500/5 bg-slate-955/15">
                 <svg className="w-48 h-32 mx-auto mb-4 text-indigo-500/40" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Planetary orbit outline */}
                   <path d="M20 60 C 20 20, 180 20, 180 60 C 180 100, 20 100, 20 60 Z" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" className="animate-spin-slow origin-center" style={{ transformOrigin: '100px 60px' }} />
                   <path d="M40 60 C 40 35, 160 35, 160 60 C 160 85, 40 85, 40 60 Z" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
-                  
+
                   {/* Connection lines */}
                   <line x1="100" y1="20" x2="60" y2="80" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3 3" />
                   <line x1="100" y1="20" x2="140" y2="80" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3 3" />
                   <line x1="60" y1="80" x2="140" y2="80" stroke="currentColor" strokeWidth="0.75" />
-                  
+
                   {/* Data Nodes */}
                   <circle cx="100" cy="20" r="4" className="fill-indigo-400 animate-pulse" />
                   <circle cx="100" cy="20" r="8" className="stroke-indigo-400/30 stroke-1 animate-ping" />
-                  
+
                   <circle cx="60" cy="80" r="4.5" className="fill-purple-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
                   <circle cx="140" cy="80" r="3.5" className="fill-pink-400 animate-pulse" style={{ animationDelay: '1s' }} />
-                  
+
                   {/* Floating particles */}
                   <circle cx="115" cy="55" r="1.5" className="fill-cyan-400 animate-bounce" style={{ animationDelay: '0.2s', animationDuration: '3s' }} />
-                  <circle cx="80" cy="40" r="2" className="fill-indigo-300 animate-bounce" style={{ animationDelay: '0.7s', animationDuration: '4.5s' }} />
+                  <circle cx="80" cy="40" r="2" className="fill-indigo-305 animate-bounce" style={{ animationDelay: '0.7s', animationDuration: '4.5s' }} />
                   <circle cx="150" cy="45" r="1" className="fill-purple-300 animate-bounce" style={{ animationDelay: '1.2s', animationDuration: '2.5s' }} />
                 </svg>
                 <h4 className="text-sm font-bold text-slate-350 dark:text-slate-355 light:text-slate-750">Planetary Links Offline</h4>
@@ -383,12 +391,12 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
       {/* Custom Glass Delete Confirmation Modal */}
       {deleteTarget && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <GlassCard className="max-w-md w-full rounded-2xl p-6 border-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.15)] bg-slate-950/85">
+          <GlassCard className="max-w-md w-full rounded-2xl p-6 border-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.15)] bg-slate-955/85">
             <div className="text-center space-y-4">
               <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto text-red-500 animate-bounce">
                 <AlertCircle size={24} />
               </div>
-              
+
               <div className="space-y-1">
                 <h3 className="text-base font-bold text-slate-100 dark:text-slate-100 light:text-slate-800">
                   Confirm Telemetry Destruction
@@ -399,7 +407,17 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
               </div>
 
               <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-850 text-left font-mono text-[11px] space-y-1.5">
-                <p className="truncate"><span className="text-red-400 font-bold">Short Link:</span> {deleteTarget.shortUrl || `${window.location.origin}/${deleteTarget.shortCode}`}</p>
+                <p className="truncate">
+                  <span className="text-red-400 font-bold">Short Link:</span>{' '}
+                  <a
+                    href={ensureAbsoluteUrl(deleteTarget.shortUrl || `${window.location.origin}/${deleteTarget.shortCode}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-indigo-400 dark:text-indigo-300 font-semibold"
+                  >
+                    {deleteTarget.shortUrl || `${window.location.origin}/${deleteTarget.shortCode}`}
+                  </a>
+                </p>
                 <p className="truncate"><span className="text-slate-400 font-bold">Destination:</span> {deleteTarget.originalUrl}</p>
                 <p><span className="text-slate-455 font-bold">Clicks Logged:</span> <span className="text-indigo-400 font-bold">{deleteTarget.clicks || 0} clicks</span></p>
               </div>

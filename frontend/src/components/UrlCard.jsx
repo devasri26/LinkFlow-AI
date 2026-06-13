@@ -28,6 +28,14 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
   // Display link matching window location for local debugging copy action, or standard redirect link
   const displayLink = url.shortUrl || `${window.location.origin}/${url.shortCode}`;
 
+  const ensureAbsoluteUrl = (link) => {
+    if (!link) return '';
+    if (!/^https?:\/\//i.test(link)) {
+      return 'https://' + link;
+    }
+    return link;
+  };
+
   const animatedClicks = useAnimatedCounter(url.clicks || 0);
 
   useEffect(() => {
@@ -79,24 +87,24 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
           <h3 className="text-base font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-1 group-hover:text-indigo-400 transition-colors truncate">
             {url.title || 'Untitled Link'}
           </h3>
-          
+
           <div className="space-y-3 mb-6">
             <div className="relative">
               <label className="text-[9px] text-indigo-400/80 uppercase font-bold tracking-widest block mb-0.5">Short Link</label>
-              
+
               {/* Floating Copy Confirmation Badge */}
               {copied && (
                 <span className="absolute -top-3.5 right-0 text-[8px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded animate-float shadow">
                   +1 Copied!
                 </span>
               )}
-              
+
               <div className="flex items-center space-x-2 bg-slate-900/60 dark:bg-slate-900/60 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-lg p-2 font-mono text-sm">
                 <a
-                  href={displayLink}
+                  href={ensureAbsoluteUrl(displayLink)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate flex-1 hover:underline text-indigo-300 dark:text-indigo-300 light:text-indigo-650 font-semibold"
+                  className="truncate flex-1 hover:underline text-indigo-300 dark:text-indigo-300 light:text-indigo-655 font-semibold"
                   title="Open shortened link"
                 >
                   {displayLink}
@@ -135,7 +143,7 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
                 {animatedClicks}
               </span>
             </div>
-            
+
             <div className="flex flex-col items-end">
               <span className="text-[9px] text-slate-400 uppercase tracking-widest">Created</span>
               <span className="text-xs font-mono text-slate-400 mt-0.5">
@@ -173,11 +181,11 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
 
       {/* QR Code download modal */}
       {showQrModal && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-slate-955/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="glass-panel max-w-sm w-full rounded-2xl p-6 text-center border-indigo-500/20 relative">
             <h3 className="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-1">Futuristic QR Matrix</h3>
             <p className="text-slate-400 text-[10px] mb-5 font-mono">Scan code or save to share</p>
-            
+
             <div className="bg-white p-3 rounded-xl inline-block mb-5 shadow-[0_0_20px_rgba(99,102,241,0.15)]">
               {qrUrl ? (
                 <img src={qrUrl} alt="QR Link Code" className="w-40 h-40 mx-auto" />
@@ -198,7 +206,7 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
               </a>
               <button
                 onClick={() => setShowQrModal(false)}
-                className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-350 font-semibold rounded-lg text-xs transition-colors border border-slate-700"
+                className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-355 font-semibold rounded-lg text-xs transition-colors border border-slate-700"
               >
                 Close
               </button>

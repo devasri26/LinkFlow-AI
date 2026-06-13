@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../utils/api';
@@ -9,6 +10,15 @@ import AnalyticsView from '../components/AnalyticsView';
 const PublicStats = ({ setToast }) => {
   const { code } = useParams();
   const [url, setUrl] = useState(null);
+
+  const ensureAbsoluteUrl = (link) => {
+    if (!link) return '';
+    if (!/^https?:\/\//i.test(link)) {
+      return 'https://' + link;
+    }
+    return link;
+  };
+
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -82,8 +92,13 @@ const PublicStats = ({ setToast }) => {
               <div className="space-y-1.5 font-mono text-[11px] text-slate-405 dark:text-slate-400 light:text-slate-600 mt-3 border-t border-slate-850 dark:border-slate-800 light:border-slate-200 pt-3">
                 <div>
                   <span className="text-indigo-400 dark:text-indigo-400 light:text-indigo-600 font-bold">Short Link:</span>{' '}
-                  <a href={url.shortUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-indigo-400 dark:text-indigo-300 light:text-indigo-650">
-                    {url.shortUrl}
+                  <a
+                    href={ensureAbsoluteUrl(url.shortUrl || `${window.location.origin}/${url.shortCode}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-indigo-400 dark:text-indigo-300 light:text-indigo-650"
+                  >
+                    {url.shortUrl || `${window.location.origin}/${url.shortCode}`}
                   </a>
                 </div>
                 <div className="truncate">
