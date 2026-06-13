@@ -82,7 +82,7 @@ const PublicStats = ({ setToast }) => {
               <div className="space-y-1.5 font-mono text-[11px] text-slate-405 dark:text-slate-400 light:text-slate-600 mt-3 border-t border-slate-850 dark:border-slate-800 light:border-slate-200 pt-3">
                 <div>
                   <span className="text-indigo-400 dark:text-indigo-400 light:text-indigo-600 font-bold">Short Link:</span>{' '}
-                  <a href={url.shortUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-indigo-305 dark:text-indigo-300 light:text-indigo-650">
+                  <a href={url.shortUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-indigo-400 dark:text-indigo-300 light:text-indigo-650">
                     {url.shortUrl}
                   </a>
                 </div>

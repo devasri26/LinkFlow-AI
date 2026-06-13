@@ -259,9 +259,14 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                             <span className="text-xs font-bold text-slate-200 dark:text-slate-200 light:text-slate-800 truncate block">
                               {url.title || 'Untitled Link'}
                             </span>
-                            <span className="text-[9px] text-slate-455 dark:text-slate-400 light:text-slate-550 font-mono truncate block">
+                            <a
+                              href={url.shortUrl || `${window.location.origin}/${url.shortCode}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[9px] text-indigo-400 hover:text-indigo-300 hover:underline font-mono truncate block"
+                            >
                               /{url.shortCode}
-                            </span>
+                            </a>
                           </div>
                         </div>
                         <div className="text-right">
