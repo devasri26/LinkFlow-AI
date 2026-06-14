@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+// Automatically strip trailing /api to prevent double /api/api in combined requests
+const getBaseURL = () => {
+  const envUrl = import.meta.env.VITE_API_URL || '';
+  return envUrl.replace(/\/api\/?$/, '');
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '', // Reads from Vercel env in production, fallback to Vite dev proxy
+  baseURL: getBaseURL(),
 });
 
 // Request interceptor to automatically attach authorization header
