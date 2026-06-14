@@ -2,6 +2,9 @@
 
 LinkFlow AI is a premium, startup-grade URL shortener, telemetry collector, and analytics command deck. It is designed to replace dull administrative grids with glassmorphic planetary graphics, rotating coordinate grids, and counting dashboards.
 
+ Youtube Link
+ https://www.youtube.com/watch?v=J20UopQab6o
+
 ---
 
 ## 🏗️ System Architecture
