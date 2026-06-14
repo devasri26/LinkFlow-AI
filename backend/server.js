@@ -19,6 +19,7 @@ connectDB();
 
 // Register routers
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes); // Support prefix without /api (e.g. /auth/login)
 app.use('/api/url', urlRoutes);
 app.use('/', redirectRoutes); // Catch shortcodes at root level
 
