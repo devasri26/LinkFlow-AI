@@ -93,12 +93,12 @@ const PublicStats = ({ setToast }) => {
                 <div>
                   <span className="text-indigo-400 dark:text-indigo-400 light:text-indigo-600 font-bold">Short Link:</span>{' '}
                   <a
-                    href={ensureAbsoluteUrl(url.shortUrl || `${window.location.origin}/${url.shortCode}`)}
+                    href={ensureAbsoluteUrl(`${window.location.origin}/${url.shortCode}`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline text-indigo-400 dark:text-indigo-300 light:text-indigo-650"
                   >
-                    {url.shortUrl || `${window.location.origin}/${url.shortCode}`}
+                    {`${window.location.origin}/${url.shortCode}`}
                   </a>
                 </div>
                 <div className="truncate">

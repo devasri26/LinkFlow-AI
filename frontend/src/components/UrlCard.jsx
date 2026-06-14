@@ -11,22 +11,17 @@ const UrlCard = ({ url, onDelete, onCopySuccess }) => {
 
   // Avoid encoding localhost URLs inside QR codes to ensure public scan compatibility
   const getShortLink = () => {
-    let link = url.shortUrl || '';
-    if (!link || link.includes('localhost') || link.includes('127.0.0.1')) {
-      const hostname = window.location.hostname;
-      if (hostname && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
-        link = `${window.location.origin}/${url.shortCode}`;
-      } else {
-        // Fallback production URL when testing locally to avoid encoding localhost
-        link = `https://linkflow.vercel.app/${url.shortCode}`;
-      }
+    const hostname = window.location.hostname;
+    if (hostname && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
+      return `${window.location.origin}/${url.shortCode}`;
     }
-    return link;
+    // Fallback production URL when testing locally to avoid encoding localhost
+    return `https://linkflow.vercel.app/${url.shortCode}`;
   };
 
   const shortLink = getShortLink();
-  // Display link matching window location for local debugging copy action, or standard redirect link
-  const displayLink = url.shortUrl || `${window.location.origin}/${url.shortCode}`;
+  // Display link matching window location (e.g. localhost during dev, production vercel on deployment)
+  const displayLink = `${window.location.origin}/${url.shortCode}`;
 
   const ensureAbsoluteUrl = (link) => {
     if (!link) return '';

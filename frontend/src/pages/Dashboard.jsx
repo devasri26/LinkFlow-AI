@@ -268,7 +268,7 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                               {url.title || 'Untitled Link'}
                             </span>
                             <a
-                              href={ensureAbsoluteUrl(url.shortUrl || `${window.location.origin}/${url.shortCode}`)}
+                              href={ensureAbsoluteUrl(`${window.location.origin}/${url.shortCode}`)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-[9px] text-indigo-400 hover:text-indigo-300 hover:underline font-mono truncate block"
@@ -410,12 +410,12 @@ const Dashboard = ({ setToast, toggleTheme, theme }) => {
                 <p className="truncate">
                   <span className="text-red-400 font-bold">Short Link:</span>{' '}
                   <a
-                    href={ensureAbsoluteUrl(deleteTarget.shortUrl || `${window.location.origin}/${deleteTarget.shortCode}`)}
+                    href={ensureAbsoluteUrl(`${window.location.origin}/${deleteTarget.shortCode}`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline text-indigo-400 dark:text-indigo-300 font-semibold"
                   >
-                    {deleteTarget.shortUrl || `${window.location.origin}/${deleteTarget.shortCode}`}
+                    {`${window.location.origin}/${deleteTarget.shortCode}`}
                   </a>
                 </p>
                 <p className="truncate"><span className="text-slate-400 font-bold">Destination:</span> {deleteTarget.originalUrl}</p>
